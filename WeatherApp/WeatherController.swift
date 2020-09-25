@@ -48,6 +48,7 @@ class WeatherController {
         let visibility : Int?
     }
     
+    // Mirror of the weatherstack return struct
     struct Weather : Decodable {
         let request : Request?
         let location : Location?
@@ -56,14 +57,15 @@ class WeatherController {
     
     var weatherAtUserLocation: Weather?
     
+    // This only exists for now as a placeholder for the full weather info
     var temperature: Int = 0 {
         didSet {
-            self.weatherAtUserLocation?.current?.temperature = temperature
             delegate?.updateTemperatureLabel("\(temperature)°C")
         }
     }
     
     init(_ weatherString: String) {
+        //Replace spaces so that it can be properly inserted into the query string
         let formattedQueryString = weatherString.replacingOccurrences(of: " ", with: "%20")
         self.getWeatherData(formattedQueryString)
     }

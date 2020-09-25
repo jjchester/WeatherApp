@@ -16,6 +16,7 @@ class LocationSelectViewController: UIViewController, WeatherControllerDelegate,
     
     var locationManager = LocationManager()
     var weatherController: WeatherController?
+    
     var locationString: String? {
         didSet {
             self.locationLabel.text = locationString
@@ -25,6 +26,7 @@ class LocationSelectViewController: UIViewController, WeatherControllerDelegate,
     }
     
     var weatherString: String? {
+        // Can't assign the label text a new value on a background thread
         didSet {
             DispatchQueue.main.async {
                 self.weatherLabel.text = self.weatherString

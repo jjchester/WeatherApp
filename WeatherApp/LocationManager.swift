@@ -31,6 +31,7 @@ class LocationManager: NSObject {
 extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // For debug, print the status of location permission for the app
         switch status {
             case .notDetermined:
                 print("notDetermined")
@@ -50,6 +51,7 @@ extension LocationManager: CLLocationManagerDelegate {
 
 extension LocationManager {
     
+    // Converts a CLLocation object into a placemark, which can be used to get city, country, etc.
     func getPlace(for location: CLLocation, completion: @escaping (CLPlacemark?) -> Void) {
 
         let geocoder = CLGeocoder()
@@ -67,6 +69,7 @@ extension LocationManager {
                 return
             }
             
+            // Pass the placemark back to be broken down
             completion(placemark)
         }
     }
